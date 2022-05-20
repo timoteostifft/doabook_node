@@ -11,14 +11,19 @@ describe ("Create user", () => {
   })
 
   it("should be able to create a new user", async () => {
-    const user = await createUserUseCase.execute({
+    
+    const user = {
       name: "Test User",
       username: "testuser",
       email: "testuser@gmail.com.br",
       password: "password",
       isAdmin: false
-    })
+    }
+    
+    await createUserUseCase.execute(user)
 
-    expect(user).toHaveProperty('id')
+    const userByEmail = await usersRepositoryInMemory.findByEmail(user.email)
+
+    expect(userByEmail).toHaveProperty('id')
   })
 })
