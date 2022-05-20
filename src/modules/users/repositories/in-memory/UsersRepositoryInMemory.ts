@@ -9,27 +9,23 @@ class UsersRepositoryInMemory implements IUsersRepository {
   
   users: User[] = [];
 
-  async create({ name, username, email, password, isAdmin }: ICreateUserDTO): Promise<User> {
+  async create({ name, email, password, isAdmin }: ICreateUserDTO): Promise<User> {
     const user = new User()
 
     Object.assign(user, {
-      name, username, email, password, isAdmin
+      name, email, password, isAdmin
     })
 
     this.users.push(user)
     return user
   }
 
-  async update({ name, email, password }: IUpdateUserDTO): Promise<User> {
+  async update({ id, data }: IUpdateUserDTO): Promise<User> {
     throw new Error("Method not implemented.")
   }
 
   async list(): Promise<User[]> {
     return this.users
-  }
-
-  async findByUsername(username: string): Promise<User | null> {
-    return this.users.find((user)=> user.username === username) || null
   }
 
   async findByEmail(email: string): Promise<User | null> {
