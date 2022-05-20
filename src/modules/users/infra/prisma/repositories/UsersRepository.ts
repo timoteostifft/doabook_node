@@ -7,15 +7,9 @@ import { IUpdateUserDTO } from "../../../dtos/IUpdateUserDTO";
 
 class UsersRepository implements IUsersRepository{
 
-  private repository: any
-
-  constructor(){
-    this.repository = prisma.users
-  }
-  
   async create({ name, username, email, password, isAdmin }: ICreateUserDTO): Promise<User> {
 
-    const user = await this.repository.create({
+    const user = await prisma.users.create({
       data: {
         name,
         username,
@@ -32,8 +26,14 @@ class UsersRepository implements IUsersRepository{
     throw new Error("Method not implemented.");
   }
 
-  async findById(id: string): Promise<any> {
-    const user = await this.repository.findFirst({
+  async list(): Promise<User[]> {
+    const all = await prisma.users.findMany()
+
+    return all
+  }
+
+  async findById(id: string): Promise<User | null> {
+    const user = await prisma.users.findFirst({
       where: {
         id
       }
@@ -41,8 +41,8 @@ class UsersRepository implements IUsersRepository{
     return user
   }
 
-  async findByUsername(username: string): Promise<User> {
-    const user = await this.repository.findFirst({
+  async findByUsername(username: string): Promise<User | null> {
+    const user = await prisma.users.findFirst({
       where: {
         username
       }
@@ -50,8 +50,8 @@ class UsersRepository implements IUsersRepository{
     return user
   }
 
-  async findByEmail(email: string): Promise<User> {
-    const user = await this.repository.findFirst({
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await prisma.users.findFirst({
       where: {
         email
       }
