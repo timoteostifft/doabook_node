@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
-import { UsersRepository } from '../../infra/prisma/repositories/UsersRepository'
+import { container } from 'tsyringe'
+
 import { CreateUserUseCase } from './CreateUserUseCase'
 
 class CreateUserController {
@@ -7,8 +8,7 @@ class CreateUserController {
 
     const { name, username, email, password, isAdmin } = request.body
 
-    const usersRepository = new UsersRepository() //!
-    const createUserUseCase = new CreateUserUseCase(usersRepository)
+    const createUserUseCase = container.resolve(CreateUserUseCase)
 
     const user = await createUserUseCase.execute({
       name,

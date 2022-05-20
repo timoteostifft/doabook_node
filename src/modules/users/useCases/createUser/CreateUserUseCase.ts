@@ -1,7 +1,9 @@
-import { hash }  from 'bcrypt'
-import { AppError } from "../../../../shared/errors/AppError"
-import { User } from '../../infra/prisma/entities/User'
+import { inject, injectable } from 'tsyringe'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
+
+import { AppError } from "../../../../shared/errors/AppError"
+import { hash }  from 'bcrypt'
+
 
 interface IRequest {
   name: string
@@ -11,11 +13,14 @@ interface IRequest {
   isAdmin: boolean
 }
 
+@injectable()
 class CreateUserUseCase {
 
-  constructor(private usersRepository: IUsersRepository){}
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository){}
 
-  async execute({name, username, email, password, isAdmin}: IRequest): Promise<User> {
+  async execute({name, username, email, password, isAdmin}: IRequest): Promise<void> {
 
     const userExists = await this.usersRepository.findByUsername(username)
 
@@ -24,8 +29,6 @@ class CreateUserUseCase {
     }
     
     const user = await this.usersRepository.create({name, username, email, password, isAdmin})
-
-    return user
   }
 }
 
