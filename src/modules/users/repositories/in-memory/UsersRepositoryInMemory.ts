@@ -1,3 +1,5 @@
+import 'reflect-metadata'
+
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUpdateUserDTO } from "../../dtos/IUpdateUserDTO";
 import { User } from "../../infra/prisma/entities/User";
