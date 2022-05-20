@@ -21,19 +21,23 @@ class UsersRepositoryInMemory implements IUsersRepository {
   }
 
   async update({ name, email, password }: IUpdateUserDTO): Promise<User> {
-    throw new Error("Method not implemented.");
+    throw new Error("Method not implemented.")
+  }
+
+  async list(): Promise<User[]> {
+    return this.users
   }
 
   async findByUsername(username: string): Promise<User | null> {
-    return this.users.find((user)=> user.username === username) || null;
+    return this.users.find((user)=> user.username === username) || null
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.users.find((user)=> user.email === email) || null;
+    return this.users.find((user)=> user.email === email) || null
   }
 
   async findById(id: string): Promise<User | null> {
-    return this.users.find((user)=> user.id === id) || null;
+    return this.users.find((user)=> user.id === id) || null
   }
 }
 
