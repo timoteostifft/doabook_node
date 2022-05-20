@@ -7,12 +7,11 @@ import { IUpdateUserDTO } from "../../../dtos/IUpdateUserDTO";
 
 class UsersRepository implements IUsersRepository{
 
-  async create({ name, username, email, password, isAdmin }: ICreateUserDTO): Promise<User> {
+  async create({ name, email, password, isAdmin }: ICreateUserDTO): Promise<User> {
 
     const user = await prisma.users.create({
       data: {
         name,
-        username,
         email,
         password,
         isAdmin
@@ -22,8 +21,14 @@ class UsersRepository implements IUsersRepository{
     return user
   }
 
-  async update(data: IUpdateUserDTO): Promise<User> {
-    throw new Error("Method not implemented.");
+  async update({ id, data }: IUpdateUserDTO): Promise<User> {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data
+    })
+    return user
   }
 
   async list(): Promise<User[]> {
@@ -36,15 +41,6 @@ class UsersRepository implements IUsersRepository{
     const user = await prisma.users.findFirst({
       where: {
         id
-      }
-    })
-    return user
-  }
-
-  async findByUsername(username: string): Promise<User | null> {
-    const user = await prisma.users.findFirst({
-      where: {
-        username
       }
     })
     return user
