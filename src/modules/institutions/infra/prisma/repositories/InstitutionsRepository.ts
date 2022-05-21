@@ -1,6 +1,7 @@
 import { prisma } from "../../../../../database/prismaClient"
 
 import { ICreateInstitutionDTO } from "../../../dto/ICreateInstitutionDTO";
+import { IUpdateInstitutionAdminDTO } from "../../../dto/IUpdateInstituionAdminDTO";
 import { IInstitutionsRepository } from "../../../repositories/IInstitutionsRepository";
 import { Institution } from "../entities/Institution";
 
@@ -15,6 +16,27 @@ class InstitutionsRepository implements IInstitutionsRepository {
       }
     })
     return institution
+  }
+
+  async updateAdmin({ id, data }: IUpdateInstitutionAdminDTO): Promise<Institution> {
+    console.log(data)
+
+    const institution = await prisma.institutions.update({
+      where: {
+        id,
+      },
+      data
+    })
+    return institution
+  }
+
+  async findById(id: string): Promise<Institution | null> {
+    const institution = await prisma.institutions.findFirst({
+      where: {
+        id
+      }
+    })
+  return institution
   }
 
   async findByName(name: string): Promise<Institution | null> {
