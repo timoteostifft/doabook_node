@@ -12,6 +12,6 @@ const updateUserController = new UpdateUserController()
 
 usersRoutes.get('/', listUsersController.handle)
 usersRoutes.post('/', createUserController.handle)
-usersRoutes.post('/update/', ensureAuthenticated, updateUserController.handle)
+usersRoutes.patch('/update/', ensureAuthenticated, updateUserController.handle)
 
 export { usersRoutes }
