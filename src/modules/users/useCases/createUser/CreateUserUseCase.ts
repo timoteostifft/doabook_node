@@ -27,8 +27,15 @@ class CreateUserUseCase {
     if (userExists) {
       throw new AppError("User already exists!", 400)
     }
+
+    const encrypted = await hash(password, 8)
     
-    const user = await this.usersRepository.create({name, email, password, isAdmin})
+    const user = await this.usersRepository.create({
+      name, 
+      email, 
+      password: encrypted,
+      isAdmin
+    })
   }
 }
 
