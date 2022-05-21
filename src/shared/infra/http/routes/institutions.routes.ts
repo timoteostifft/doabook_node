@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import { CreateInstitutionController } from '../../../../modules/institutions/useCases/createInstitution/CreateInstitutionController'
-import { DeleteInstitutionAdminController } from '../../../../modules/institutions/useCases/deleteInstitutionAdmin/DeleteInstitutionAdminController'
+import { UpdateInstitutionAdminController } from '../../../../modules/institutions/useCases/updateInstitutionAdmin/UpdateInstitutionAdminController'
 
 const institutionsRoutes = Router()
 
 const createInstitutionController = new CreateInstitutionController()
-const deleteInstitutionAdminController = new DeleteInstitutionAdminController()
+const updateInstitutionAdminController = new UpdateInstitutionAdminController()
 
 institutionsRoutes.post('/', createInstitutionController.handle)
-institutionsRoutes.post('/admin', deleteInstitutionAdminController.handle)
+institutionsRoutes.patch('/:id', updateInstitutionAdminController.handle)
 
 export { institutionsRoutes }
