@@ -30,6 +30,11 @@ class InstitutionsRepository implements IInstitutionsRepository {
     return institution
   }
 
+  async list(): Promise<Institution[]> {
+    const all = await prisma.institutions.findMany()
+    return all
+  }
+
   async findById(id: string): Promise<Institution | null> {
     const institution = await prisma.institutions.findFirst({
       where: {
