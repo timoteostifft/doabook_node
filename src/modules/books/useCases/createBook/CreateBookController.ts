@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-// import { Book } from '../infra/prisma/entities/Book'
 import { CreateBookUseCase } from './CreateBookUseCase'
 
 
