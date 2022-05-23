@@ -19,8 +19,6 @@ class InstitutionsRepository implements IInstitutionsRepository {
   }
 
   async updateAdmin({ id, data }: IUpdateInstitutionAdminDTO): Promise<Institution> {
-    console.log(data)
-
     const institution = await prisma.institutions.update({
       where: {
         id,
