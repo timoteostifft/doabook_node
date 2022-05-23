@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 async function main () {
   await prisma.users.create({
-    data: admin
+    data: await admin()
   })
 }
 
