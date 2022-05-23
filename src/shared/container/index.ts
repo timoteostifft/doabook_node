@@ -5,6 +5,8 @@ import { UsersRepository } from "../../modules/users/infra/prisma/repositories/U
 
 import { IInstitutionsRepository } from '../../modules/institutions/repositories/IInstitutionsRepository'
 import { InstitutionsRepository } from '../../modules/institutions/infra/prisma/repositories/InstitutionsRepository'
+import { IBooksRepository } from "../../modules/books/repositories/IBooksRepository";
+import { BooksRepository } from "../../modules/books/infra/prisma/repositories/BooksRepository";
 
 
 container.registerSingleton<IUsersRepository>(
@@ -15,4 +17,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IInstitutionsRepository>(
   "InstitutionsRepository",
   InstitutionsRepository
+)
+
+container.registerSingleton<IBooksRepository>(
+  "BooksRepository",
+  BooksRepository
 )
