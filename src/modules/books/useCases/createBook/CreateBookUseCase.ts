@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe"
-import { Book } from "../infra/prisma/entities/Book"
-import { IBooksRepository } from "../repositories/IBooksRepository"
+import { Book } from "../../infra/prisma/entities/Book"
+import { IBooksRepository } from "../../repositories/IBooksRepository"
 
 interface IRequest {
   name: string
