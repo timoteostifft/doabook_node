@@ -1,6 +1,7 @@
 import { prisma } from "../../../../../database/prismaClient"
 
 import { ICreateBookDTO } from "../../../dtos/ICreateBookDTO";
+import { IUpdateBookDTO } from "../../../dtos/IUpdateBookDTO";
 import { IBooksRepository } from "../../../repositories/IBooksRepository";
 import { Book } from "../entities/Book";
 
@@ -8,6 +9,16 @@ class BooksRepository implements IBooksRepository  {
   
   async create(data: ICreateBookDTO): Promise<Book> {
     const book = await prisma.books.create({
+      data
+    })
+    return book
+  }
+
+  async update({ id, data }: IUpdateBookDTO): Promise<Book> {
+    const book = await prisma.books.update({
+      where: {
+        id,
+      },
       data
     })
     return book
@@ -30,6 +41,13 @@ class BooksRepository implements IBooksRepository  {
           increment: 1
         }
       }
+    })
+    return book
+  }
+
+  async findById(id: string): Promise<Book | null> {
+    const book = await prisma.books.findFirst({
+      where: { id }
     })
     return book
   }
