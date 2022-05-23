@@ -8,6 +8,6 @@ const createBookController = new CreateBookController()
 const updateBookController = new UpdateBookController()
 
 booksRoutes.post("/", createBookController.handle)
-booksRoutes.patch("/", updateBookController.handle)
+booksRoutes.patch("/:id", updateBookController.handle)
 
 export { booksRoutes }
