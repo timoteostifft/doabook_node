@@ -24,6 +24,13 @@ class BooksRepository implements IBooksRepository  {
     return book
   }
 
+  async list(institution_id: string): Promise<Book[]> {
+    const all = await prisma.books.findMany({
+      where: { institution_id }
+    })
+    return all
+  }
+
   async findExist(name: string, edition: number, condition: string): Promise<Book | null> {
     const book = await prisma.books.findFirst({
       where: { name, edition, condition }
