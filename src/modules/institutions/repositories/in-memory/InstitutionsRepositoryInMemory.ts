@@ -1,0 +1,3 @@
+class InstitutionsRepositoryInMemory {}
+
+export { InstitutionsRepositoryInMemory }
