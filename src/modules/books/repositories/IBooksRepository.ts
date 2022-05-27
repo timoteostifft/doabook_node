@@ -6,6 +6,7 @@ interface IBooksRepository {
   create(data: ICreateBookDTO): Promise<Book>
   increment(id: string): Promise<Book>
   update({ id, data }: IUpdateBookDTO): Promise<Book>
+  list(institution_id: string): Promise<Book[]>
   findExist(name: string, edition: number, condition: string): Promise<Book | null>
   findById(id: string): Promise<Book | null>
 }
